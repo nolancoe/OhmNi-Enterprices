@@ -1,0 +1,113 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+
+
+<style type="text/css">
+
+  .card-signin {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+    background-color: #b47f9e;
+    border: 1px solid #e3c373;
+    border-radius: 60px;
+  }
+
+  .btn-primary{
+        border: 2px solid #FFC107;
+        border-radius: 100px;
+
+    }
+
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .form-control{
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+
+    }
+
+  .content{
+    text-align: center;
+    background-color: #4c0b37;
+
+}
+
+</style>
+
+<body class="content">
+
+  <br/><br/>
+  <form action="" method=POST>
+    {% csrf_token %}
+
+
+
+  <br/><br/>
+
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+          <div class="card card-signin">
+              <div class="card-body">
+                  <div class="d-flex flex-column pb-3">
+                    <h1>Appointment Approval</h1>
+                    <p class="card-text">Appointment Count: {{appointment_count}}</p>
+                    <p class="card-text">User Count: {{user_count}}</p>
+                    <br/>
+                    <table class="table table-striped table-hover table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Appointment</th>
+                          <th scope="col">Aproved</th>
+                          <th scope="col">Deny</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    {% for appointment in appointment_list %}
+
+                        <tr>
+                          <td>{{ appointment }}</td>
+                          <td>
+                            {% if appointment.approved %}
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" checked="checked" value={{appointment.id}} name="boxes">
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value={{appointment.id}} name="boxes">
+                            </div>
+                            {% endif %}
+
+                          </td>
+                          <td><a href="{% url 'cancel-appointment' appointment.id %}" class="btn btn-outline-danger btn-sm">Deny</a></td>
+                        </tr>
+
+                    {% endfor %}
+                     </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+  </div>
+<br>
+  <button class='btn btn-secondary' type="submit">Update Approval</button>
+  <br/><br/><br/>
+  <br/><br/><br/>
+</body>
+
+
+{% endblock %}

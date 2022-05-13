@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<style type="text/css">
+    .image-container{
+        max-width: 250px;
+        height: auto;
+        position: relative;
+    }
+    .field-heading{
+        color: #737373;
+    }
+    #id_confirm{
+        color: green;
+    }
+    #id_confirm:hover {
+        opacity: 0.3;
+    }
+    #id_cancel:hover {
+        opacity: 0.3;
+    }
+    #id_cancel{
+        color: red;
+    }
+    .material-icons{
+        font-size: 30px;
+    }
+    .material-icons:hover{
+        cursor: pointer;
+    }
+
+    .card{
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+        background-color: #b47f9e;
+        border: 1px solid #e3c373;
+        border-radius: 60px;
+    }
+
+    .btn-primary{
+        border: 2px solid #FFC107;
+        border-radius: 100px;
+
+    }
+
+    .form-control{
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+
+    }
+
+</style>
+
+
+<body class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="card profile-card">
+              <div class="card-body">
+                <div class="d-flex flex-column justify-content-center p-4">
+
+
+
+                    <form class="form-signin" method="post">{% csrf_token %}
+                        <h1>Account Settings</h1>
+                        <div class="d-flex flex-column pb-3">
+                          <img class="img-fluid mx-auto d-block" src="{% static 'OE/img/ohmnilogo.png' %}" alt="OhmNi Enterprises" width="175" height="175">
+                        </div>
+
+                        <h6>Email</h6>
+                        <input type="email" name="email" id="id_input_email" class="form-control" placeholder="Email address" required autofocus value={{form.initial.email}}>
+                        <br>
+                        <h6>Username</h6>
+                        <input type="text" name="username" id="id_input_username" class="form-control" placeholder="Username" required
+                        value="{{form.initial.username}}">
+                        <h6>First Name</h6>
+                        <input type="text" name="first_name" id="id_input_first_name" class="form-control" placeholder="First Name" required
+                        value="{{form.initial.first_name}}">
+                        <h6>Last Name</h6>
+                        <input type="text" name="last_name" id="id_input_last_name" class="form-control" placeholder="Last Name" required
+                        value="{{form.initial.last_name}}">
+                        <div class="mt-4 checkbox">
+                            <label>
+                                <input type="checkbox" name="mailing_list" id="id_input_mailing_list" {% if form.initial.mailing_list %}checked{%endif%}>
+                                Mailing List
+                            </label>
+
+                        </div>
+
+                        {% for field in form %}
+                        <p>
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                        </p>
+                        {% endfor %}
+                        {% if form.non_field_errors %}
+                        <div style="color: red">
+                        <p>{{form.non_field_errors}}</p>
+                        </div>
+
+                        {% endif %}
+
+                        <div class="d-flex flex-column mt-4">
+                            <button class="mt-4 btn btn-primary flex-grow-1" type="submit">Save</button>
+                        </div>
+
+                    </form>
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<br><br><br>
+
+
+
+{% endblock content %}

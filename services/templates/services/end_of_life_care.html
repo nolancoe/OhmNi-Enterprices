@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Life Coach </title>
+    <link rel="stylesheet" href="{% static 'OE/css/main.css' %}">
+</head>
+
+{% if user.is_authenticated %}
+    <body class="content">
+        <main>
+            <div>
+            <h1>End Of Life Care</h1>
+                <hr>
+            <h3>End Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life Care</h3>
+                <hr>
+
+            <h2>
+            <a href="{% url 'book-appointment' %}">Book An Appointment</a>
+            </h2>
+            </div>
+        </main>
+    </body>
+{% else %}
+    <body class="content">
+        <h1>End Of Life Care</h1>
+            <hr>
+
+        <h3>End Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life CareEnd Of Life Care</h3>
+
+            <hr>
+        <h2>
+        <a href="{% url 'register' %}">Click here to register!</a>
+        </h2>
+    </body>
+{% endif %}
+
+{% endblock %}

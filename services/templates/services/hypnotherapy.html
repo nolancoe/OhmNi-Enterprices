@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Life Coach </title>
+    <link rel="stylesheet" href="{% static 'OE/css/main.css' %}">
+</head>
+
+{% if user.is_authenticated %}
+    <body class="content">
+        <main>
+            <div>
+            <h1>Hypnotherapy</h1>
+                <hr>
+            <h3>Hypnotherapy is a type of mind-body intervention in which hypnosis is used to create a state of focused
+            attention and increased suggestibility in the treatment of a medical or psychological disorder or concern.</h3>
+                <hr>
+
+                <h2>
+                <a href="{% url 'book-appointment' %}">Book An Appointment</a>
+                </h2>
+            </div>
+        </main>
+    </body>
+{% else %}
+    <body class="content">
+        <h1>Hypnotherapy</h1>
+            <hr>
+
+        <h3>Hypnotherapy is a type of mind-body intervention in which hypnosis is used to create a state of focused
+        attention and increased suggestibility in the treatment of a medical or psychological disorder or concern.</h3>
+
+            <hr>
+        <h2>
+        <a href="{% url 'register' %}">Click here to register!</a>
+        </h2>
+    </body>
+{% endif %}
+
+{% endblock %}

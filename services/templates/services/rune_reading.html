@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Life Coach </title>
+    <link rel="stylesheet" href="{% static 'OE/css/main.css' %}">
+</head>
+
+{% if user.is_authenticated %}
+    <body class="content">
+        <main>
+            <div>
+            <h1>Rune Readings</h1>
+                <hr>
+            <h3>Rune reading, also called rune casting, is a divination tool that uses stones with symbols to answer questions about your past, present, and future.
+            Rune stones can also help you get clarification or advice on how to address an issue or problem.</h3>
+                <hr>
+
+                <h2>
+                <a href="{% url 'book-appointment' %}">Book An Appointment</a>
+                </h2>
+
+            </div>
+        </main>
+    </body>
+{% else %}
+    <body class="content">
+        <h1>Rune Readings</h1>
+            <hr>
+
+        <h3>Rune reading, also called rune casting, is a divination tool that uses stones with symbols to answer questions about your past, present, and future.
+        Rune stones can also help you get clarification or advice on how to address an issue or problem.</h3>
+
+            <hr>
+        <h2>
+        <a href="{% url 'register' %}">Click here to register!</a>
+        </h2>
+    </body>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<style type="text/css">
+
+  .card-signin {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+    background-color: #b47f9e;
+    border: 1px solid #e3c373;
+    border-radius: 60px;
+  }
+
+  .btn-primary{
+        border: 2px solid #FFC107;
+        border-radius: 100px;
+
+    }
+
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .form-control{
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+
+    }
+
+  .content{
+    text-align: center;
+    background-color: #4c0b37;
+
+}
+
+</style>
+
+
+<body class="content">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+          <div class="card card-signin">
+            <div class="card-body">
+              <form class="form-signin" method="post">{% csrf_token %}
+                  <div class="d-flex flex-column pb-3">
+                    <h1>Login</h1>
+                  <img class="img-fluid mx-auto d-block" src="{% static 'OE/img/ohmnilogo.png' %}" alt="OhmNi Enterprises" width="175" height="175">
+                  </div>
+                  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+                  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                  {% for field in login_form %}
+                  <p>
+                  {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                  </p>
+                  {% endfor %}
+                  {% if login_form.non_field_errors %}
+                  <div style="color: red">
+                  <p>{{login_form.non_field_errors}}</p>
+                  </div>
+
+                  {% endif %}
+
+                  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                  </form>
+
+                  <div class="d-flex flex-column my-4">
+                      <a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
+                  </div>
+            </div>
+          </div>
+
+      </div>
+  </div>
+</body>
+
+
+
+
+
+{% endblock content %}

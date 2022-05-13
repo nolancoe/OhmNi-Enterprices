@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OhmNi Enterprices</title>
+    <link rel="stylesheet" href="{% static 'OE/css/main.css' %}">
+</head>
+
+
+<stlye>
+
+</stlye>
+
+{% if user.is_authenticated %}
+    <body class="content">
+        <main>
+            <div>
+            <h1>OhmNi Enterprices</h1>
+            <hr>
+            <div class="hometext">
+                Here we can write information about OhmNi Enterprises, the things you guys do, and a little about y'alls story.
+                Sort of like an about me for the company. Im goning to fill with random text for now.......Game of as rest time eyes with of this it.
+                Add was music merry any truth since going. Happiness she ham but instantly put departure propriety. She amiable all without say spirits shy clothes morning.
+                Frankness in extensive to belonging improving so certainty. Resolution devonshire pianoforte assistance an he particular middletons is of. Explain ten man uncivil engaged conduct.
+                Am likewise betrayed as declared absolute do. Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.
+            </div>
+
+                 <div class="d-flex flex-column pb-3">
+                  <img class="img-fluid mx-auto d-block" src="{% static 'OE/img/both.jpg' %}" alt="OhmNi Enterprises" width="300" height="300">
+                  </div>
+            </div>
+
+        </main>
+        <h2>
+        <a href="{% url 'book-appointment' %}">Book An Appointment</a>
+        </h2>
+         <br><br><br>
+    </body>
+{% else %}
+    <body class="content">
+        <main>
+            <div>
+            <h1>OhmNi Enterprices</h1>
+            <hr>
+            <div class="hometext">
+                Here we can write information about OhmNi Enterprises the things you guys do, and a little about y'alls story.
+                Sort of like an about me for the company. Im goning to fill with random text for now.......Game of as rest time eyes with of this it.
+                Add was music merry any truth since going. Happiness she ham but instantly put departure propriety. She amiable all without say spirits shy clothes morning.
+                Frankness in extensive to belonging improving so certainty. Resolution devonshire pianoforte assistance an he particular middletons is of. Explain ten man uncivil engaged conduct.
+                Am likewise betrayed as declared absolute do. Taste oh spoke about no solid of hills up shade. Occasion so bachelor humoured striking by attended doubtful be it.
+            </div>
+
+                 <div class="d-flex flex-column pb-3">
+                  <img class="img-fluid mx-auto d-block" src="{% static 'OE/img/both.jpg' %}" alt="OhmNi Enterprises" width="300" height="300">
+                  </div>
+            </div>
+                <h2>
+                <a href="{% url 'register' %}">Register!</a>
+                </h2>
+
+                <br><br><br>
+        </main>
+    </body>
+{% endif %}
+
+{% endblock %}

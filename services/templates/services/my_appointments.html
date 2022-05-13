@@ -1,0 +1,182 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+
+<style type="text/css">
+
+  .pastapp{
+    color: white;
+    background-color: green;
+    border-radius: 20px;
+
+  }
+
+    .contentB{
+        text-align: center;
+        background-color: black;
+        border-radius: 10px;
+    }
+
+</style>
+
+
+<div class="centerlist">
+
+    <hr>
+
+</div>
+        {% for appointment in appointments %}
+        {% if user == appointment.client %}
+        {% if appointment.Is_Past == 'Future' %}
+
+
+        <div class="content">
+        <h1>{{ appointment.service }}</h1>
+            </div>
+<div class="centerlist">
+        <p class="card-text">
+            <ul>
+
+        <li class="list">Date: {{ appointment.appointment_date }}</li>
+        <li class="list">Time: {{ appointment.appointment_time }}</li>
+        <li class="list">Days Till Appointment: {{ appointment.Days_till }}</li>
+        <!-- <li class="list">Is Past?: {{ appointment.Is_Past }}</li> -->
+        <li class="list">Approved: {{ appointment.approved|yesno:"Yes,No" }}</li>
+        </li>
+        </ul>
+
+
+
+        </p>
+</div>
+      {% if user.is_authenticated %}
+
+        {% if appointment.Is_Past == 'Future' %}
+
+          <div class="content card-footer text-muted">
+            <a href="{% url 'cancel-appointment' appointment.id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment</a>
+          </div>
+
+        {% else %}
+
+            <div class="content card-footer text-muted">
+            <div class="pastapp">Past Appointment</div>
+          </div>
+
+        {% endif %}
+        {% endif %}
+      {% endif %}
+      {% endif %}
+    </div>
+
+
+
+
+<br>
+
+
+
+
+
+
+        {% endfor %}
+
+
+{% if user.is_superuser %}
+
+            <h2>
+            <a href="{% url 'admin_approval' %}">Approve Appointments</a>
+            </h2>
+
+            <br>
+
+            <h2>
+            <a href="{% url 'list-appointments' %}">View All Appointments</a>
+            </h2>
+
+            <br>
+
+            <h2>
+            <a href="{% url 'admin:index' %}">Admin Backend</a>
+            </h2>
+
+    {% else %}
+
+        <h2>
+        <a href="{% url 'book-appointment' %}">Book Appointment</a>
+        </h2>
+    {% endif %}
+        <hr>
+        <br><br><br>
+
+    <div class="centerlist">
+
+
+    <hr>
+
+</div>
+            <hr>
+            <div class="contentB">
+                <h1>Past Appointmets</h1>
+            </div>
+            <hr>
+        {% for appointment in appointments %}
+        {% if user == appointment.client %}
+        {% if appointment.Is_Past == 'Past' %}
+
+        <div class="content">
+        <h1>{{ appointment.service }}</h1>
+            </div>
+<div class="centerlist">
+        <p class="card-text">
+            <ul>
+
+        <li class="list">Date: {{ appointment.appointment_date }}</li>
+        <li class="list">Time: {{ appointment.appointment_time }}</li>
+        <!-- <li class="list">Days Till Appointment: {{ appointment.Days_till }}</li> -->
+        <li class="list">Till Appointment: {{ appointment.Is_Past }}</li>
+        <li class="list">Approved: {{ appointment.approved|yesno:"Yes,No" }}</li>
+        </li>
+        </ul>
+
+
+
+        </p>
+</div>
+      {% if user.is_authenticated %}
+        {% if appointment.Is_Past == 'Future' %}
+
+          <div class="content card-footer text-muted">
+            <a href="{% url 'cancel-appointment' appointment.id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment</a>
+          </div>
+
+        {% else %}
+
+            <hr>
+
+        {% endif %}
+        {% endif %}
+      {% endif %}
+      {% endif %}
+    </div>
+
+
+
+
+<br>
+
+
+
+
+
+
+        {% endfor %}
+
+
+
+
+
+
+
+{% endblock %}
